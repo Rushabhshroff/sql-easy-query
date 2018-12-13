@@ -14,10 +14,10 @@ function Insert(){
     name:'SomeName',
     age:21,
   }
-  let query = Query.Insert("Users", user).query;
+  let query = new Query().Insert("Users", user).query;
 }
 function CreateDatase(){
-  let query = Query.CreateDatabase('Name').query;
+  let query = new Query().CreateDatabase('Name').query;
 }
 function CreateTable(){
   let Scheme = {
@@ -25,7 +25,7 @@ function CreateTable(){
     name:'VARCHAR(255) NOT NULL',
     age:'INT(32)'
   }
-  let query = Query.CreateTable('TableName',Scheme).query;
+  let query = new Query().CreateTable('TableName',Scheme).query;
 }
 
 ```
