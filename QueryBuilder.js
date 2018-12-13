@@ -193,4 +193,4 @@ Query.prototype.DropTable = function(Table) {
   this.query = `DROP TABLE ${Table} `;
   return this;
 };
-module.exports = new Query();
+module.exports = Query;
