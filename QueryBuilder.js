@@ -69,7 +69,7 @@ Query.prototype.Not = function(Condition) {
   return this;
 };
 Query.prototype.OrderBy = function(Condition) {
-  this.query += `ORDERBY ${Condition} `;
+  this.query += `ORDER BY ${Condition} `;
   return this;
 };
 Query.prototype.GroupBy = function(Column) {
@@ -85,8 +85,13 @@ Query.prototype.Update = function(fromTable) {
 };
 Query.prototype.Set = function(Data){
   let properties = '';
+  let operators = /[\+\-\*\%\=\/]/gm
   for(let member in Data){
-    properties+= `${member} = '${Data[member]}',`;
+    if(typeof(Data[member]) == 'string' && !operators.test(Data[member])){  
+      properties+= `${member} = '${Data[member]}',`;
+    }else{
+      properties+= `${member} = ${Data[member]},`;
+    }
   }
   properties = properties.substring(0,properties.length-1);
   this.query += `SET ${properties}`;
@@ -109,7 +114,7 @@ Query.prototype.In = function(Option) {
     this.query += `In (${Option.query}) `;
     return this;
   }else{
-    this.query += `IN ${Option} `;
+    this.query = `IN ${Option} `;
     return this;
   }
 };
@@ -193,6 +198,4 @@ Query.prototype.DropTable = function(Table) {
   this.query = `DROP TABLE ${Table} `;
   return this;
 };
-
 module.exports = Query;
-
