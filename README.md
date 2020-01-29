@@ -27,9 +27,3 @@ function CreateTable(){
   }
   let query = new Query().CreateTable('TableName',Scheme).query;
 }
-
-<<<<<<< HEAD
-```
-=======
-```
->>>>>>> b75dec6046af1718cd6953c579de105f0f8b5d34
